@@ -5,7 +5,7 @@ services:
         container_name: service-postgres
         image: postgres:12
         environment:
-          - POSTGRES_DB=TestUserverPG_db-1
+          - POSTGRES_DB=myuserver_db-1
           - POSTGRES_USER=user
           - POSTGRES_PASSWORD=password
         ports:
@@ -16,16 +16,16 @@ services:
         networks:
           - postgres
 
-    TestUserverPG-container:
+    myuserver-container:
         image: ghcr.io/userver-framework/ubuntu-userver-build-base:v1
         privileged: true
         environment:
-          - POSTGRES_DB=TestUserverPG_db-1
+          - POSTGRES_DB=myuserver_db-1
           - POSTGRES_USER=user
           - POSTGRES_PASSWORD=password
           - PREFIX=${PREFIX:-~/.local}
           - CC
-          - CCACHE_DIR=/TestUserverPG/.ccache
+          - CCACHE_DIR=/myuserver/.ccache
           - CCACHE_HASHDIR
           - CCACHE_NOHASHDIR
           - CCACHE_PREFIX
@@ -36,12 +36,12 @@ services:
           - MAKE_OPTS
           - CMAKE_OPTIONS
         volumes:
-          - .:/TestUserverPG:rw
+          - .:/myuserver:rw
           - ./third_party/userver/tools/docker:/tools:ro
           - ${TC_CORES_DIR:-./.cores}:/cores:rw
         ports:
           - 8080:8080
-        working_dir: /TestUserverPG
+        working_dir: /myuserver
         entrypoint:
           - /tools/run_as_user.sh
         depends_on:

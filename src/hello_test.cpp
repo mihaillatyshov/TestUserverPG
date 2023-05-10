@@ -3,8 +3,8 @@
 #include <userver/utest/utest.hpp>
 
 UTEST(SayHelloTo, Basic) {
-  using TestUserverPG::SayHelloTo;
-  using TestUserverPG::UserType;
+  using myuserver::SayHelloTo;
+  using myuserver::UserType;
 
   EXPECT_EQ(SayHelloTo("Developer", UserType::kFirstTime),
             "Hello, Developer!\n");

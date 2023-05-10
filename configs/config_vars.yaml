@@ -6,4 +6,4 @@ is_testing: false
 
 server-port: 8080
 
-dbconnection: 'postgresql://TestUserverPG_user:password@localhost:5432/TestUserverPG_db_1'
+dbconnection: "postgresql://postgres:postgres@localhost:5432/myuserver_db_1"

@@ -1,6 +1,7 @@
 #include "hello.hpp"
 
 #include <fmt/format.h>
+#include <iostream>
 
 #include <userver/clients/dns/component.hpp>
 #include <userver/server/handlers/http_handler_base.hpp>
@@ -8,7 +9,7 @@
 #include <userver/storages/postgres/component.hpp>
 #include <userver/utils/assert.hpp>
 
-namespace TestUserverPG {
+namespace myuserver {
 
 namespace {
 
@@ -28,6 +29,7 @@ class Hello final : public userver::server::handlers::HttpHandlerBase {
       const userver::server::http::HttpRequest& request,
       userver::server::request::RequestContext&) const override {
     const auto& name = request.GetArg("name");
+    std::cout << "StartReq" << name << std::endl;
 
     auto user_type = UserType::kFirstTime;
     if (!name.empty()) {
@@ -44,7 +46,7 @@ class Hello final : public userver::server::handlers::HttpHandlerBase {
       }
     }
 
-    return TestUserverPG::SayHelloTo(name, user_type);
+    return myuserver::SayHelloTo(name, user_type);
   }
 
   userver::storages::postgres::ClusterPtr pg_cluster_;
@@ -73,4 +75,4 @@ void AppendHello(userver::components::ComponentList& component_list) {
   component_list.Append<userver::clients::dns::Component>();
 }
 
-}  // namespace TestUserverPG
+}  // namespace myuserver
